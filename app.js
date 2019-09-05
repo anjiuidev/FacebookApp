@@ -25,21 +25,21 @@ const dbURI = 'mongodb://localhost:27017/facebook';
 //   // useNewUrlParser: true
 // });
 // mongoose.connect('mongodb+srv://anji:anji@cluster0-zfwrf.mongodb.net/test?retryWrites=true');
-// mongoose.connect(dbURI);
+mongoose.connect(dbURI);
 
 // When successfully connected
-// mongoose.connection.on('connected', () => {
-//   console.log('Mongoose connected Successfully');
-// });
-// // If the connection throws an error
-// mongoose.connection.on('error', function (err) {
-//   console.log('Mongoose default connection error: ' + err);
-// });
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose connected Successfully');
+});
+// If the connection throws an error
+mongoose.connection.on('error', function (err) {
+  console.log('Mongoose default connection error: ' + err);
+});
 
-// // When the connection is disconnected
-// mongoose.connection.on('disconnected', function () {
-//   console.log('Mongoose default connection disconnected');
-// });
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {
+  console.log('Mongoose default connection disconnected');
+});
 
 //setup configuration for facebook login
 passportConfig();
@@ -95,5 +95,8 @@ app.listen('3000', () => {
 //   .listen('3000', () => {
 //     console.log('Server is running at port 3000');
 //   });
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled Rejection at:', reason.stack || reason)
+})
 
 module.exports = app;
