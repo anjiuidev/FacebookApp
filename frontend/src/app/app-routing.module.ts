@@ -1,10 +1,40 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
+import { AnonymousGuard } from './anonymous.guard';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-const routes: Routes = [];
+const appRoutes: Routes = [
+    {
+        path: 'welcome',
+        component: LoginComponent,
+        canActivate: [AnonymousGuard]
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
+    },
+    { path: '', redirectTo: 'welcome' , pathMatch: 'full' }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(appRoutes)
+    ],
+    exports: [
+        RouterModule,
+        LoginComponent,
+        DashboardComponent
+    ],
+    declarations: [
+        LoginComponent,
+        DashboardComponent
+    ],
+    providers: [
+        AuthGuard,
+        AnonymousGuard
+    ]
 })
 export class AppRoutingModule { }
