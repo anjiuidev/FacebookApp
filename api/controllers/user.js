@@ -41,6 +41,9 @@ exports.facebook_auth = (req, res, next) => {
 }
 
 exports.get_single_user = (req, res, next) => {
+  res.status(400).json({
+    "data": "data"
+  });
   User.findById({ _id: req.auth.id }).exec()
     .then(result => {
       res.status(200).json({
