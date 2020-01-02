@@ -65,7 +65,7 @@ var corsOption = {
 app.use(cors(corsOption));
 
 // Routes 
-app.get('/api/v1', userRoutes);
+app.use('/api/v1', userRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
