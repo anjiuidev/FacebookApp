@@ -18,15 +18,15 @@ const userRoutes = require('./api/routes/user');
 //   key: fs.readFileSync(path.join(__dirname, 'ssl', 'server.key'))
 // }
 
-// const dbURI = 'mongodb://localhost:27017/facebook';
+const dbURI = 'mongodb://localhost:27017/facebook';
 
 // Mongoose connect
 // mongoose.connect('mongodb://'+ env.MONGO_ATLAS.USERNAME +':'+ env.MONGO_ATLAS.PASSWORD +'@cluster0-shard-00-00-zfwrf.mongodb.net:27017,cluster0-shard-00-01-zfwrf.mongodb.net:27017,cluster0-shard-00-02-zfwrf.mongodb.net:27017/rest_api?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',{
 //   // useNewUrlParser: true
 // });
 // mongoose.connect('mongodb+srv://anji:anji@cluster0-zfwrf.mongodb.net/test?retryWrites=true');
-mongoose.connect('mongodb://anji:anji407@ds317808.mlab.com:17808/fbapp')
-// mongoose.connect(dbURI);
+// mongoose.connect('mongodb://anji:anji407@ds317808.mlab.com:17808/fbapp')
+mongoose.connect(dbURI);
 
 // When successfully connected
 mongoose.connection.on('connected', () => {

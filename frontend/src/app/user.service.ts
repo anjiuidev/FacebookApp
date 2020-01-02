@@ -30,6 +30,7 @@ export class UserService {
                 // if (token) {
                   // localStorage.setItem('id_token', token);
                 // }
+                console.log("Token", response)
                 resolve(response);
               })
               .catch(() => reject());

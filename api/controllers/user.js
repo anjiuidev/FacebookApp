@@ -24,12 +24,14 @@ const sendToken = (req, res) => {
 };
 
 exports.facebook_auth = (req, res, next) => {
+  console.log("a Request made..!")
   passport.authenticate('facebook-token', {session: false}), (req, res, next) => {
     if (!req.user) {
       return res.status(401).json({
         "error": "User Not Authenticated"
       });
     }
+    console.log("Request made..!")
 
     // prepare token for API
     req.auth = {
