@@ -6,17 +6,12 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const env = require('./env');
-// const https = require('https');
-// const fs = require('fs');
+const https = require('https');
+const fs = require('fs');
 
 const passportConfig = require('./api/middlewares/passport');
 
 const userRoutes = require('./api/routes/user');
-
-// const httpsOptions = {
-//   cert: fs.readFileSync(path.join(__dirname, 'ssl', 'server.crt')),
-//   key: fs.readFileSync(path.join(__dirname, 'ssl', 'server.key'))
-// }
 
 const dbURI = 'mongodb://localhost:27017/facebook';
 
@@ -87,15 +82,19 @@ app.use((error, req, res, next) => {
     }
   })
 });
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log('Server is running at port ' + port);
-})
+const port = process.env.PORT || 8080;
+https.createServer({
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+}, app)
+.listen(port, function () {
+  console.log('Example app listening on port 8080! Go to https://localhost:8080/')
+});
 
-// https.createServer(httpsOptions, app)
-//   .listen('3000', () => {
-//     console.log('Server is running at port 3000');
-//   });
+// app.listen(port, () => {
+//   console.log('Server is running at port ' + port);
+// })
+
 process.on('unhandledRejection', (reason, promise) => {
   console.log('Unhandled Rejection at:', reason.stack || reason)
 })
